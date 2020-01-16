@@ -6,7 +6,7 @@ Sprator is a GUI application to generate sprites using [cellular automaton](http
 
 ## Requirement
 
-Sprator can be build using [Visual Studio 2019](https://visualstudio.microsoft.com/ja/vs/) and [OpenSiv3D v0.4.2](https://github.com/Siv3D/OpenSiv3D).)
+Sprator can be build using [Visual Studio 2019](https://visualstudio.microsoft.com/ja/vs/) and [OpenSiv3D v0.4.2](https://github.com/Siv3D/OpenSiv3D).
 
 ## License
 
