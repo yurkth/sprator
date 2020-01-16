@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2cdaa5ab-3a2b-4412-84d5-e912840a129a}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Sprator</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SIV3D_0_4_2)\include;$(SIV3D_0_4_2)\include\ThirdParty;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SIV3D_0_4_2)\lib\Windows;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Intermediate\$(ProjectName)\Debug\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\Debug\Intermediate\</IntDir>
+    <TargetName>$(ProjectName)(debug)</TargetName>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SIV3D_0_4_2)\include;$(SIV3D_0_4_2)\include\ThirdParty;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SIV3D_0_4_2)\lib\Windows;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Intermediate\$(ProjectName)\Release\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\Release\Intermediate\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="App\engine\texture\box-shadow\128.png" />
+    <Image Include="App\engine\texture\box-shadow\16.png" />
+    <Image Include="App\engine\texture\box-shadow\256.png" />
+    <Image Include="App\engine\texture\box-shadow\32.png" />
+    <Image Include="App\engine\texture\box-shadow\64.png" />
+    <Image Include="App\engine\texture\box-shadow\8.png" />
+    <Image Include="App\example\bay.jpg" />
+    <Image Include="App\example\particle.png" />
+    <Image Include="App\example\siv3d-kun.png" />
+    <Image Include="App\example\windmill.png" />
+    <Image Include="App\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="App\Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App\engine\emoji\noto7_dictionary.dat" />
+    <None Include="App\engine\font\fontawesome\fontawesome-brands.otf.zstdcmp" />
+    <None Include="App\engine\font\fontawesome\fontawesome-solid.otf.zstdcmp" />
+    <None Include="App\engine\font\mplus\LICENSE_E" />
+    <None Include="App\engine\font\mplus\mplus-1p-black.ttf.zstdcmp" />
+    <None Include="App\engine\font\mplus\mplus-1p-bold.ttf.zstdcmp" />
+    <None Include="App\engine\font\mplus\mplus-1p-heavy.ttf.zstdcmp" />
+    <None Include="App\engine\font\mplus\mplus-1p-light.ttf.zstdcmp" />
+    <None Include="App\engine\font\mplus\mplus-1p-medium.ttf.zstdcmp" />
+    <None Include="App\engine\font\mplus\mplus-1p-regular.ttf.zstdcmp" />
+    <None Include="App\engine\font\mplus\mplus-1p-thin.ttf.zstdcmp" />
+    <None Include="App\engine\font\noto\NotoColorEmoji.ttf.zstdcmp" />
+    <None Include="App\engine\font\noto\NotoEmoji-Regular.ttf.zstdcmp" />
+    <None Include="App\engine\objdetect\haarcascade\eye.xml.zstdcmp" />
+    <None Include="App\engine\objdetect\haarcascade\eye_eyeglasses.xml.zstdcmp" />
+    <None Include="App\engine\objdetect\haarcascade\face_anime.xml.zstdcmp" />
+    <None Include="App\engine\objdetect\haarcascade\frontal_catface.xml.zstdcmp" />
+    <None Include="App\engine\objdetect\haarcascade\frontal_face_alt2.xml.zstdcmp" />
+    <None Include="App\engine\shader\copy.ps" />
+    <None Include="App\engine\shader\fullscreen_triangle_draw.ps" />
+    <None Include="App\engine\shader\fullscreen_triangle_draw.vs" />
+    <None Include="App\engine\shader\fullscreen_triangle_resolve.ps" />
+    <None Include="App\engine\shader\fullscreen_triangle_resolve.vs" />
+    <None Include="App\engine\shader\gaussian_blur_9.ps" />
+    <None Include="App\engine\shader\round_dot.ps" />
+    <None Include="App\engine\shader\sdf.ps" />
+    <None Include="App\engine\shader\shape.ps" />
+    <None Include="App\engine\shader\sprite.vs" />
+    <None Include="App\engine\shader\square_dot.ps" />
+    <None Include="App\engine\shader\texture.ps" />
+    <None Include="App\engine\soundfont\GMGSx.sf2.zstdcmp" />
+    <None Include="App\example\config\config.csv" />
+    <None Include="App\example\config\config.ini" />
+    <None Include="App\example\config\config.json" />
+    <None Include="App\example\config\config.toml" />
+    <None Include="App\example\font\LogoTypeGothic\LICENSE_E" />
+    <None Include="App\example\font\NotoSansCJKjp\README" />
+    <None Include="App\example\font\Pecita\LICENSE" />
+    <None Include="App\example\gui\gui.toml" />
+    <None Include="App\example\svm\a1a_testing" />
+    <None Include="App\example\svm\a1a_training" />
+    <None Include="App\example\test.toml" />
+    <None Include="App\nlp\japanese\jumanpp\LICENSE" />
+    <None Include="App\nlp\japanese\jumanpp\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="App\engine\font\fontawesome\LICENSE.txt" />
+    <Text Include="App\engine\font\noto\LICENSE_OFL.txt" />
+    <Text Include="App\example\font\AnnyantRoman\readme.txt" />
+    <Text Include="App\example\font\LogoTypeGothic\ReadMe_windows.txt" />
+    <Text Include="App\example\font\NotoSansCJKjp\LICENSE_OFL.txt" />
+    <Text Include="App\example\LICENSE.txt" />
+    <Text Include="App\example\script\paint.txt" />
+    <Text Include="App\example\script\test.txt" />
+    <Text Include="App\example\test.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="App\example\font\AnnyantRoman\AnnyantRoman.ttf" />
+    <Font Include="App\example\font\LogoTypeGothic\LogoTypeGothic.otf" />
+    <Font Include="App\example\font\NotoSansCJKjp\NotoSansCJKjp-Regular.otf" />
+    <Font Include="App\example\font\Pecita\Pecita.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="App\example\shot.mp3" />
+    <Media Include="App\example\test.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="App\example\config\config.xml" />
+    <Xml Include="App\example\test.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App\example\shader\2d\default_shape.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\default_texture.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\game_of_life.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\grayscale.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\multi_texture_blend.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\multi_texture_mask.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\poisson_disk.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\posterize.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\rgb_shift.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\rgb_to_bgr.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="App\example\shader\2d\swirl.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="Sprite.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
