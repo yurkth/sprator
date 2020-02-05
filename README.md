@@ -6,7 +6,7 @@ Sprator is a GUI application to generate sprites using [cellular automaton](http
 
 ## Installation
 
-You can [download]() Sprator for Windows.
+You can [download](https://github.com/yurkth/sprator/releases) Sprator for Windows.
 
 ## Requirement
 
