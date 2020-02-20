@@ -352,3 +352,6 @@ MigrationBackup/
 # Sprator
 *.exe
 /Intermediate
+
+# Sprator-ts
+lib

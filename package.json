@@ -1,0 +1,41 @@
+{
+  "name": "sprator",
+  "version": "0.0.0",
+  "description": "8bit sprite generator invented by torin",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "tsc && ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackforplay/sprator.git"
+  },
+  "keywords": [
+    "8bit",
+    "sprite",
+    "generator"
+  ],
+  "author": "teramotodaiki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hackforplay/sprator/issues"
+  },
+  "homepage": "https://github.com/hackforplay/sprator#readme",
+  "dependencies": {
+    "canvas": "^2.6.1"
+  },
+  "devDependencies": {
+    "@ava/typescript": "^1.1.1",
+    "ava": "^3.3.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5"
+  },
+  "ava": {
+    "typescript": {
+      "rewritePaths": {
+        "Sprator-ts/": "lib/"
+      }
+    },
+    "snapshotDir": "__snapshot__"
+  }
+}
