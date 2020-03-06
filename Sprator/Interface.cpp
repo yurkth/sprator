@@ -88,10 +88,10 @@ void sprator::Interface::drawExportMenu(Array<sprator::Sprite>& sprites) {
                 .savePNG(Dialog::SaveFile({ FileFilter::PNG() }).value_or(U""));
         }
         else if (selected == -1) {
-            System::ShowMessageBox(U"いずれかのスプライトを選択してください。", MessageBoxStyle::Error);
+            System::ShowMessageBox(U"Please select the sprite.", MessageBoxStyle::Error);
         }
         else {
-            System::ShowMessageBox(U"Sizeは16以上8192以下の数値にしてください。", MessageBoxStyle::Error);
+            System::ShowMessageBox(U"Size must be 16 or more and 8192 or less.", MessageBoxStyle::Error);
         }
     }
 }
