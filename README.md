@@ -14,6 +14,34 @@ Sprator can be build using [Visual Studio 2019](https://visualstudio.microsoft.c
 
 ## Usage
 
+Select the sprite and click "Save" to save the PNG.
+
+Sprite color can be set with "Base Color" and background color can be set with "BG Color".
+
+Right-click to change the number of cellular automaton steps.
+
+## Theory
+
+1. Generate 4x8 white noise.
+
+   ![](https://user-images.githubusercontent.com/59264002/76070404-d38c0e00-5fd7-11ea-9ec2-674813c12490.png)
+
+2. Change the state according to the following rules.
+
+   - Any live cell with two or three neighbors survives.
+   - Any dead cell with one or less live neighbors becomes a live cell.
+   - All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+
+3. Repeat steps 2 several times.
+
+   ![](https://user-images.githubusercontent.com/59264002/76070371-bfe0a780-5fd7-11ea-9690-34e86dd9f3e3.png)
+
+4. Flip and add a outline, complete!
+
+   ![](https://user-images.githubusercontent.com/59264002/76070456-e56db100-5fd7-11ea-9fed-4c178bf0a756.png)
+
+## Blog
+
 [以前作ったアイコン生成ソフトをリメイクした - 屋根裏](https://yurkth.hateblo.jp/entry/sprite-generator)
 
 ## License
