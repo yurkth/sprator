@@ -34,7 +34,7 @@ Right-click to change the number of cellular automaton steps.
 
 3. Repeat steps 2 several times.
 
-   ![](https://user-images.githubusercontent.com/59264002/76070371-bfe0a780-5fd7-11ea-9690-34e86dd9f3e3.png)
+   ![](https://user-images.githubusercontent.com/59264002/76137835-c8db8280-6084-11ea-80e8-68d436590d7b.png)
 
 4. Flip and add a outline, complete!
 
