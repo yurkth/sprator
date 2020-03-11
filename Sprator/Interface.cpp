@@ -108,5 +108,5 @@ void sprator::Interface::draw(Array<sprator::Sprite>& sprites) {
     drawSprites(sprites);
     drawGenerateMenu(sprites);
     drawExportMenu(sprites);
-    copyright(U"Sprator 0.1.0").draw(727, 581, Palette::White);
+    copyright(U"Sprator 0.1.1").draw(727, 581, Palette::White);
 }
