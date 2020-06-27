@@ -36,7 +36,7 @@ Right-click to change the number of cellular automaton steps.
 
    ![](https://user-images.githubusercontent.com/59264002/76137835-c8db8280-6084-11ea-80e8-68d436590d7b.png)
 
-4. Flip and add a outline, complete!
+4. Flip and add an outline, complete!
 
    ![](https://user-images.githubusercontent.com/59264002/76070456-e56db100-5fd7-11ea-9fed-4c178bf0a756.png)
 
