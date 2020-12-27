@@ -9,25 +9,25 @@ namespace sprator {
             bool current : 1;
         };
 
-        Rect frame;
-        int spriteSize = 10; // 4以上の偶数(実用的なのは8,10,12くらい)
-        Grid<Cell> spriteGrid = Grid<Cell>(spriteSize / 2, spriteSize);
-        HSV rndColor;
-        Image image;
-        DynamicTexture texture = DynamicTexture(image);
+        Rect frame_;
+        const size_t spriteSize_ = 10; // 4以上の偶数(実用的なのは8,10,12くらい)
+        Grid<Cell> spriteGrid_ = Grid<Cell>(spriteSize_ / 2, spriteSize_);
+        HSV rndColor_;
+        Image image_;
+        DynamicTexture texture_ = DynamicTexture(image_);
 
-        int countNeighborhood(int y, int x);
+        size_t countNeighborhood(size_t y, size_t x);
         void grow();
 
     public:
-        Sprite(const Rect& _frame);
+        Sprite(const Rect& frame);
 
-        void init(int growCount);
+        void init(uint8 growCount);
         void update(const HSV& baseColor, const HSV& bgColor);
         void draw() const;
-        Image grid2image(const int exportSize, const HSV& baseColor, const HSV& bgColor);
+        Image grid2image(const size_t exportSize, const HSV& baseColor, const HSV& bgColor);
 
-        const Rect& getFrame() const { return frame; }
-        const HSV& getColor() const { return rndColor; }
+        const Rect& getFrame() const { return frame_; }
+        const HSV& getColor() const { return rndColor_; }
     };
 }
