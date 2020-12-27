@@ -56,7 +56,7 @@ Resource(engine/font/mplus/mplus-1p-regular.ttf.zstdcmp)
 // Siv3D App Resources (Your application resources here)
 //
 //////////////////////////////////////////////////////
-
+Resource(gui.toml)
 
 
 /* 

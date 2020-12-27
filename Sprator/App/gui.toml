@@ -1,0 +1,58 @@
+﻿[[TextBox]]
+name = "tb-Seed"
+pos = { x = 663, y = 76 }
+width = 120
+maxChars = 8
+enabled = true
+
+[[Button]]
+name = "bt-Load"
+label = "Load"
+pos = { x = 612, y = 125 }
+width = 171
+enabled = true
+
+[[Button]]
+name = "bt-Refresh"
+label = "Refresh"
+pos = { x = 612, y = 173 }
+width = 171
+enabled = true
+
+[[RadioButtons]]
+name = "rb-BaseColor"
+pos = { x = 635, y = 287 }
+options = [ "Random", "#"]
+default = 0
+enabled = true
+
+[[TextBox]]
+name = "tb-BaseColor"
+pos = { x = 689, y = 326 }
+default = "b3b3b3"
+width = 94
+maxChars = 6
+enabled = false
+
+[[TextBox]]
+name = "tb-BgColor"
+pos = { x = 689, y = 404 }
+default = "4d4d4d"
+width = 94
+maxChars = 6
+enabled = true
+
+[[TextBox]]
+name = "tb-Size"
+pos = { x = 687, y = 482 }
+default = "400"
+width = 68
+maxChars = 4
+enabled = true
+
+[[Button]]
+name = "bt-Save"
+label = "Save"
+pos = { x = 612, y = 531 }
+width = 171
+enabled = true

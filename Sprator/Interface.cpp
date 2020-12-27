@@ -1,6 +1,6 @@
 #include "Interface.h"
 
-void sprator::Interface::parseColor(HSV& targetColor, TextEditState& targetTes, double brightness) {
+void sprator::Interface::parseColor(HSV& targetColor, const TextEditState& targetTes, double brightness) const {
     targetColor = HSV(ParseOr<Color>(U"#{}"_fmt(targetTes.text), HSV(0, 0, brightness)));
 }
 
@@ -39,19 +39,17 @@ void sprator::Interface::drawSprites(Array<sprator::Sprite>& sprites) {
 
 void sprator::Interface::drawGenerateMenu(Array<sprator::Sprite>& sprites) {
     generateBG.draw(Palette::White).drawFrame(3, 0, darkGray);
-    label(U"Generate").draw(generateLabel.pos, darkGray);
-    label(U"Seed").draw(seedLabel.pos, darkGray);
-    if (textBox(seedTes, seedTextBox)) {
-        seed = ParseOr<int>(seedTes.text, Random(0, 99999999));
-    }
-    if (button(U"Load", loadButton)) {
-        seedTes.text = Format(seed);
+    label(U"Generate").draw(generateBG.pos + Point(52, 5), darkGray);
+    label(U"Seed").draw(generateBG.pos + Point(11, 35), darkGray);
+    if (gui.button(U"bt-Load")) {
+        seed = ParseOr<int>(gui.textBox(U"tb-Seed").text, Random(0, 99999999));
+        std::get<SimpleGUIWidget::TextBox>(gui.widget(U"tb-Seed").widget).state.text = Format(seed);
         updateSprites(sprites, growCount);
         selected = -1;
     }
-    if (bool a = button(U"Refresh", refreshButton)) {
+    if (gui.button(U"bt-Refresh")) {
         seed = Random(0, 99999999);
-        seedTes.text = Format(seed);
+        std::get<SimpleGUIWidget::TextBox>(gui.widget(U"tb-Seed").widget).state.text = Format(seed);
         updateSprites(sprites, growCount);
         selected = -1;
     }
@@ -59,29 +57,29 @@ void sprator::Interface::drawGenerateMenu(Array<sprator::Sprite>& sprites) {
 
 void sprator::Interface::drawExportMenu(Array<sprator::Sprite>& sprites) {
     exportBG.draw(Palette::White).drawFrame(3, 0, darkGray);
-    label(U"Export").draw(exportLabel.pos, darkGray);
-    label(U"Base Color").draw(baseLabel.pos, darkGray);
-    if (radioButtons({ U"Random", U"#" }, baseRadio)) {
+    label(U"Export").draw(exportBG.pos + Point(65, 5), darkGray);
+    label(U"Base Color").draw(exportBG.pos + Point(11, 35), darkGray);
+    if (gui.hasChanged(U"rb-BaseColor")) {
+        baseIndex = gui.radioButtons(U"rb-BaseColor");
+        std::get<SimpleGUIWidget::TextBox>(gui.widget(U"tb-BaseColor").widget).enabled = baseIndex;
         updateSprites(sprites);
     }
-    if (textBox(baseTes, baseTextBox, baseIndex)) {
-        parseColor(baseColor, baseTes, 0.7);
-        updateSprites(sprites);
-    }
-
-    label(U"BG Color").draw(bgLabel.pos, darkGray);
-    label(U"#").draw(sharpLabel.pos, darkGray);
-    if (textBox(bgTes, bgTextBox)) {
-        parseColor(bgColor, bgTes, 0.3);
+    if (gui.hasChanged(U"tb-BaseColor")) {
+        parseColor(baseColor, gui.textBox(U"tb-BaseColor"), 0.7);
         updateSprites(sprites);
     }
 
-    label(U"Size").draw(sizeLabel.pos, darkGray);
-    label(U"px").draw(pxLabel.pos, darkGray);
-    if (textBox(sizeTes, sizeTextBox)) {
-        exportSize = ParseOr<int>(sizeTes.text, 0);
+    label(U"BG Color").draw(exportBG.pos + Point(11, 142), darkGray);
+    label(U"#").draw(exportBG.pos + Point(70, 182), darkGray);
+    if (gui.hasChanged(U"tb-BgColor")) {
+        parseColor(bgColor, gui.textBox(U"tb-BgColor"), 0.3);
+        updateSprites(sprites);
     }
-    if (button(U"Save", saveButton)) {
+
+    label(U"Size").draw(exportBG.pos + Point(11, 220), darkGray);
+    label(U"px").draw(exportBG.pos + Point(160, 260), darkGray);
+    if (gui.button(U"bt-Save")) {
+        const int exportSize = ParseOr<int>(gui.textBox(U"tb-Size").text, 0);
         if (16 <= exportSize && exportSize <= 8192 && selected != -1) {
             // ダイアログを開いて画像を保存
             sprites[selected].grid2image(exportSize, baseIndex ? baseColor : sprites[selected].getColor(), bgColor)
@@ -98,15 +96,14 @@ void sprator::Interface::drawExportMenu(Array<sprator::Sprite>& sprites) {
 
 sprator::Interface::Interface() {
     Reseed(seed);
-    seedTes.text = Format(seed);
-    baseTes.text = U"b3b3b3";
-    bgTes.text = U"4d4d4d";
-    sizeTes.text = U"400";
+    const_cast<Array<SimpleGUI::Widget>&>(gui.widgets()).reverse();
+    std::get<SimpleGUIWidget::TextBox>(gui.widget(U"tb-Seed").widget).state.text = Format(seed);
 }
 
 void sprator::Interface::draw(Array<sprator::Sprite>& sprites) {
     drawSprites(sprites);
     drawGenerateMenu(sprites);
     drawExportMenu(sprites);
-    copyright(U"Sprator 0.1.1").draw(copyrightLabel.pos, Palette::White);
+    gui.draw();
+    copyright(U"Sprator 0.1.1").draw(Point(727, 581), Palette::White);
 }
