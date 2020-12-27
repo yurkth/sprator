@@ -27,7 +27,7 @@ namespace sprator {
         void draw() const;
         Image grid2image(const size_t exportSize, const HSV& baseColor, const HSV& bgColor);
 
-        const Rect& getFrame() const { return frame_; }
-        const HSV& getColor() const { return rndColor_; }
+        const Rect& frame() const { return frame_; }
+        const HSV& color() const { return rndColor_; }
     };
 }

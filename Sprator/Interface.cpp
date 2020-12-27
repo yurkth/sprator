@@ -21,7 +21,7 @@ namespace sprator {
 
     void Interface::updateSprites() {
         for (auto& sprite : sprites_) {
-            sprite.update(gui_.radioButtons(U"rb-BaseColor") ? baseColor_ : sprite.getColor(), bgColor_);
+            sprite.update(gui_.radioButtons(U"rb-BaseColor") ? baseColor_ : sprite.color(), bgColor_);
         }
     }
 
@@ -29,7 +29,7 @@ namespace sprator {
         Reseed(seed_);
         for (auto& sprite : sprites_) {
             sprite.init(growCount_);
-            sprite.update(gui_.radioButtons(U"rb-BaseColor") ? baseColor_ : sprite.getColor(), bgColor_);
+            sprite.update(gui_.radioButtons(U"rb-BaseColor") ? baseColor_ : sprite.color(), bgColor_);
         }
     }
 
@@ -55,7 +55,7 @@ namespace sprator {
     void Interface::update() {
         // sprites
         for (const auto& [i, sprite] : Indexed(sprites_)) {
-            if (sprite.getFrame().leftClicked()) {
+            if (sprite.frame().leftClicked()) {
                 selected_ = i;
             }
         }
@@ -94,16 +94,16 @@ namespace sprator {
         }
         if (gui_.button(U"bt-Save")) {
             const size_t exportSize = ParseOr<int>(gui_.textBox(U"tb-Size").text, 0);
-            if (16 <= exportSize && exportSize <= 8192 && selected_ != -1) {
+            if (16 <= exportSize && exportSize <= Image::MaxHeight && selected_ != -1) {
                 // ダイアログを開いて画像を保存
-                sprites_[selected_].grid2image(exportSize, gui_.radioButtons(U"rb-BaseColor") ? baseColor_ : sprites_[selected_].getColor(), bgColor_)
+                sprites_[selected_].grid2image(exportSize, gui_.radioButtons(U"rb-BaseColor") ? baseColor_ : sprites_[selected_].color(), bgColor_)
                     .savePNG(Dialog::SaveFile({ FileFilter::PNG() }).value_or(U""));
             }
             else if (selected_ == -1) {
                 System::ShowMessageBox(U"Please select the sprite.", MessageBoxStyle::Error);
             }
             else {
-                System::ShowMessageBox(U"Size must be 16 or more and 8192 or less.", MessageBoxStyle::Error);
+                System::ShowMessageBox(U"Size must be 16 or more and {} or less."_fmt(Image::MaxHeight), MessageBoxStyle::Error);
             }
         }
     }
@@ -114,7 +114,7 @@ namespace sprator {
             sprite.draw();
         }
         if (selected_ != -1) {
-            sprites_[selected_].getFrame().drawFrame(3, 0, Color(89, 178, 255));
+            sprites_[selected_].frame().drawFrame(3, 0, Color(89, 178, 255));
         }
 
         // UI
