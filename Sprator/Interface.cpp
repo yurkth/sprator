@@ -1,6 +1,20 @@
 #include "Interface.h"
 
 namespace sprator {
+    namespace detail {
+        Menu& Menu::addLabel(const String& text, const Point& offset) {
+            labels_ << Label(text, offset);
+            return *this;
+        }
+
+        void Menu::draw() const {
+            background_.draw(Palette::White).drawFrame(3, 0, color_);
+            for (const auto& label : labels_) {
+                font_(label.text).draw(background_.pos + label.pos, color_);
+            }
+        }
+    }
+
     void Interface::parseColor(HSV& targetColor, const TextEditState& targetTes, double brightness) const {
         targetColor = HSV(ParseOr<Color>(U"#{}"_fmt(targetTes.text), HSV(0, 0, brightness)));
     }
@@ -26,6 +40,16 @@ namespace sprator {
             sprites_ << Sprite(Rect(5 + 85 * (i % 7), 5 + 85 * (i / 7), 80));
         }
         const_cast<Array<SimpleGUI::Widget>&>(gui_.widgets()).reverse();
+        generateMenu
+            .addLabel(U"Generate", Point(52, 5))
+            .addLabel(U"Seed", Point(11, 35));
+        exportMenu
+            .addLabel(U"Export", Point(65, 5))
+            .addLabel(U"Base Color", Point(11, 35))
+            .addLabel(U"#", Point(70, 182))
+            .addLabel(U"BG Color", Point(11, 142))
+            .addLabel(U"Size", Point(11, 220))
+            .addLabel(U"px", Point(160, 260));
     }
 
     void Interface::update() {
@@ -93,25 +117,10 @@ namespace sprator {
             sprites_[selected_].getFrame().drawFrame(3, 0, Color(89, 178, 255));
         }
 
-        // generate menu
-        const Rect generateBG = Rect(600, 5, 195, 216);
-        generateBG.draw(Palette::White).drawFrame(3, 0, darkGray_);
-        label_(U"Generate").draw(generateBG.pos + Point(52, 5), darkGray_);
-        label_(U"Seed").draw(generateBG.pos + Point(11, 35), darkGray_);
-
-        // export menu
-        const Rect exportBG = Rect(600, 226, 195, 353);
-        exportBG.draw(Palette::White).drawFrame(3, 0, darkGray_);
-        label_(U"Export").draw(exportBG.pos + Point(65, 5), darkGray_);
-        label_(U"Base Color").draw(exportBG.pos + Point(11, 35), darkGray_);
-        label_(U"#").draw(exportBG.pos + Point(70, 182), darkGray_);
-        label_(U"BG Color").draw(exportBG.pos + Point(11, 142), darkGray_);
-        label_(U"Size").draw(exportBG.pos + Point(11, 220), darkGray_);
-        label_(U"px").draw(exportBG.pos + Point(160, 260), darkGray_);
-
+        // UI
+        generateMenu.draw();
+        exportMenu.draw();
         copyright_(U"Sprator 0.1.1").draw(Point(727, 581), Palette::White);
-
-        // GUI
         gui_.draw();
     }
 }

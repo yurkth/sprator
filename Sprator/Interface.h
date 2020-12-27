@@ -3,6 +3,33 @@
 #include "Sprite.h"
 
 namespace sprator {
+    namespace detail {
+        class Menu {
+        private:
+            struct Label {
+                String text;
+                Point pos;
+                Label(const String& _text, const Point& _pos)
+                    : text(_text)
+                    , pos(_pos) {}
+            };
+
+            Rect background_;
+            Array<Label> labels_;
+
+            const Font font_ = Font(20, Typeface::Medium);
+            const HSV color_ = HSV(0, 0, 0.2);
+
+        public:
+            Menu(const Point& pos, const Size& size)
+                : background_(Rect(pos, size)) {}
+
+            Menu& addLabel(const String& text, const Point& offset);
+
+            void draw() const;
+        };
+    }
+
     class Interface {
     private:
         Array<sprator::Sprite> sprites_;
@@ -14,8 +41,8 @@ namespace sprator {
         HSV baseColor_ = HSV(0, 0, 0.7); // #b3b3b3
         HSV bgColor_ = HSV(0, 0, 0.3); // #4d4d4d
 
-        const HSV darkGray_ = HSV(0, 0, 0.2);
-        const Font label_ = Font(20, Typeface::Medium);
+        detail::Menu generateMenu = detail::Menu(Point(600, 5), Size(195, 216));
+        detail::Menu exportMenu = detail::Menu(Point(600, 226), Size(195, 353));
         const Font copyright_ = Font(10, Typeface::Regular);
 
         SimpleGUIManager gui_ = SimpleGUIManager(Resource(U"gui.toml"));
